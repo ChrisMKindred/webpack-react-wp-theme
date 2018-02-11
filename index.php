@@ -1,7 +1,10 @@
 <?php get_header(); ?>
 
-    <h1 class="h1">hello</h1>
+    <div class="container">
+        <div class="row">
+            <div id="app"></div>
+        </div>
+    </div>
 
-    <div id="app"></div>
 
 <?php get_footer(); ?>
