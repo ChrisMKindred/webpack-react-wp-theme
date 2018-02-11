@@ -1,8 +1,10 @@
-$bg-color: pink;
+$bg-color: #eee;
+
 body {
  background: $bg-color;
 }
 
 h1 {
-    font-size: 124px;
+    font-size: 24px;
+    text-transform: uppercase;
 }

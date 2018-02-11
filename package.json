@@ -5,7 +5,7 @@
   "main": "src/app.js",
   "scripts": {
     "build": "webpack",
-    "start": "webpack --watch",
+    "watch": "webpack --watch",
     "dev": "webpack-dev-server --progress --colors",
     "browser": "webpack && npm run dev"
   },
