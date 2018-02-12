@@ -7,3 +7,15 @@ body {
 h1 {
     text-transform: uppercase;
 }
+
+div.post {
+    padding: 14px 0px 5px 0px;
+    border-bottom: 1px solid rgb(32, 214, 8);
+
+    span {
+        font-weight: bold;
+        font-style: italic;
+    }
+}
+
+

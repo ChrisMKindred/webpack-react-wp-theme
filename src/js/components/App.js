@@ -13,38 +13,49 @@ class App extends React.Component {
     };
   }
 
+  timer() {
+      this.getPosts();
+      //console.log('runing timer');
+  }
+
   componentWillMount() {
-    // alert( 'here' );
     // this runs right before the <App> is rendered
-    console.log( `componentWillMount: ${this.state.posts}` );
+    clearInterval(this.intervalId);
   }
 
   componentDidMount() {
+    this.getPosts();
+    this.intervalId = setInterval(this.timer.bind(this), 10000);
+  }
+
+  getPosts(){
     let th = this;
     axios.get(this.props.source)
       .then(function(result) {
         th.setState({
             posts: result.data
           });
-        console.log(result.data); 
         });
+        // console.table(this.state.posts);
   }
+
 
   render() {
     return (
       <div>
-        <Header title="My Site" />
+        <Header title="Testing React" />
         <div className="post-wrapper">
-          testing: 
           <ul>
             {this.state.posts.map(
               function(post) {
-                return (
-                  <li key="{post.ID}">{post.title.rendered} by: {post._embedded.author[0].name}</li>
+                return ( 
+                  <div className='post' key={post.id.toString()}>
+                    <h2><a href={post.link}>{post.title.rendered}</a> <span className='lead'>by: {post._embedded.author[0].name}</span></h2>
+                    <p dangerouslySetInnerHTML={{__html: post.excerpt.rendered}}></p>
+                  </div>
                 )
               }
             )}
-
           </ul>
 			  </div>
       </div>

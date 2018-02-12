@@ -1689,7 +1689,7 @@ __webpack_require__(58);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_reactDom2.default.render(_react2.default.createElement(_App2.default, { source: 'https://test.dev/wp-json/wp/v2/posts/?_embed&per_page=30&author=1' }), document.querySelector('#app'));
+_reactDom2.default.render(_react2.default.createElement(_App2.default, { source: 'https://test.dev/wp-json/wp/v2/posts/?_embed&per_page=10&author=1,2' }), document.querySelector('#app'));
 // import Header from './components/Header';
 
 /***/ }),
@@ -19033,22 +19033,33 @@ var App = function (_React$Component) {
   }
 
   _createClass(App, [{
+    key: 'timer',
+    value: function timer() {
+      this.getPosts();
+      //console.log('runing timer');
+    }
+  }, {
     key: 'componentWillMount',
     value: function componentWillMount() {
-      // alert( 'here' );
       // this runs right before the <App> is rendered
-      console.log('componentWillMount: ' + this.state.posts);
+      clearInterval(this.intervalId);
     }
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
+      this.getPosts();
+      this.intervalId = setInterval(this.timer.bind(this), 10000);
+    }
+  }, {
+    key: 'getPosts',
+    value: function getPosts() {
       var th = this;
       _axios2.default.get(this.props.source).then(function (result) {
         th.setState({
           posts: result.data
         });
-        console.log(result.data);
       });
+      // console.table(this.state.posts);
     }
   }, {
     key: 'render',
@@ -19056,21 +19067,34 @@ var App = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_Header2.default, { title: 'My Site' }),
+        _react2.default.createElement(_Header2.default, { title: 'Testing React' }),
         _react2.default.createElement(
           'div',
           { className: 'post-wrapper' },
-          'testing:',
           _react2.default.createElement(
             'ul',
             null,
             this.state.posts.map(function (post) {
               return _react2.default.createElement(
-                'li',
-                { key: '{post.ID}' },
-                post.title.rendered,
-                ' by: ',
-                post._embedded.author[0].name
+                'div',
+                { className: 'post', key: post.id.toString() },
+                _react2.default.createElement(
+                  'h2',
+                  null,
+                  _react2.default.createElement(
+                    'a',
+                    { href: post.link },
+                    post.title.rendered
+                  ),
+                  ' ',
+                  _react2.default.createElement(
+                    'span',
+                    { className: 'lead' },
+                    'by: ',
+                    post._embedded.author[0].name
+                  )
+                ),
+                _react2.default.createElement('p', { dangerouslySetInnerHTML: { __html: post.excerpt.rendered } })
               );
             })
           )
