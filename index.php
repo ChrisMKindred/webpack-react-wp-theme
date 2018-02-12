@@ -2,7 +2,9 @@
 
     <div class="container">
         <div class="row">
-            <div id="app"></div>
+            <div id="app">
+                <!-- React app goes here!  -->
+            </div>
         </div>
     </div>
 
