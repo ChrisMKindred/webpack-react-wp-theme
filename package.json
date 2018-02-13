@@ -4,10 +4,10 @@
   "description": "Test WordPress Theme Using React",
   "main": "src/app.js",
   "scripts": {
-  "build": "webpack",
-  "watch": "webpack --watch",
-  "prod": "webpack --config webpack.prod.js"
-},
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "prod": "webpack --config webpack.prod.js"
+  },
   "author": "Chris Kindred",
   "license": "ISC",
   "devDependencies": {
@@ -29,5 +29,8 @@
     "style-loader": "^0.20.1",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.11.1"
+  },
+  "dependencies": {
+    "moment": "^2.20.1"
   }
 }

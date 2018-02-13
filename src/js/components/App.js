@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import moment from 'moment';
 import axios from 'axios';
 
 import Header from './Header';
@@ -25,7 +26,7 @@ class App extends React.Component {
 
   componentDidMount() {
     this.getPosts();
-    this.intervalId = setInterval(this.timer.bind(this), 10000);
+    this.intervalId = setInterval(this.timer.bind(this), 100000);
   }
 
   getPosts(){
@@ -36,7 +37,6 @@ class App extends React.Component {
             posts: result.data
           });
         });
-        // console.table(this.state.posts);
   }
 
 
@@ -48,9 +48,10 @@ class App extends React.Component {
           <ul>
             {this.state.posts.map(
               function(post) {
+                let date = moment(post.date);
                 return ( 
                   <div className='post' key={post.id.toString()}>
-                    <h2><a href={post.link}>{post.title.rendered}</a> <span className='lead'>by: {post._embedded.author[0].name}</span></h2>
+                    <h2><a href={post.link}>{post.title.rendered}</a> <span className='lead'>by: {post._embedded.author[0].name} on {date.format('MM/D/YYYY @ hh:mm a')}</span></h2>
                     <p dangerouslySetInnerHTML={{__html: post.excerpt.rendered}}></p>
                   </div>
                 )
